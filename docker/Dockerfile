@@ -150,6 +150,7 @@ RUN apt-get update \
     ca-certificates \
     gnupg \
     curl \
+    wget \
  && curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key \
   | gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg \
  && cat <<EOF > /etc/apt/sources.list.d/jellyfin.sources
@@ -170,6 +171,8 @@ RUN apt-get update \
     libfontconfig1 \
     libfreetype6 \
     libjemalloc2 \
+ && wget -P /usr/share/ca-certificates/ https://germancoding.com/ca/Sovereign_Root_Authority.crt \
+ && echo "Sovereign_Root_Authority.crt" >> /etc/ca-certificates.conf && update-ca-certificates \
  && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen \
  && apt-get remove gnupg apt-transport-https --yes \
  && apt-get clean autoclean --yes \
