@@ -250,8 +250,9 @@ ENV LD_PRELOAD=/usr/lib/jellyfin/libjemalloc.so.2
 RUN mkdir -p ${JELLYFIN_DATA_DIR} ${JELLYFIN_CACHE_DIR} \
  && chmod 777 ${JELLYFIN_DATA_DIR} ${JELLYFIN_CACHE_DIR}
 
-COPY --from=server /server /jellyfin
-COPY --from=web /web /jellyfin/jellyfin-web
+COPY --from=server --chown=1050:1050 /server /jellyfin
+COPY --from=web --chown=1050:1050 /web /jellyfin/jellyfin-web
+
 ARG JELLYFIN_VERSION
 LABEL "org.opencontainers.image.source"="https://github.com/jellyfin/jellyfin-packaging"
 LABEL "org.opencontainers.image.title"="Jellyfin"
