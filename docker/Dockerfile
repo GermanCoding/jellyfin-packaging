@@ -154,7 +154,7 @@ RUN apt-get update \
   | gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg \
  && cat <<EOF > /etc/apt/sources.list.d/jellyfin.sources
 Types: deb
-URIs: https://repo.jellyfin.org/debian
+URIs: https://repo.jellyfin.org/master/debian
 Suites: ${OS_VERSION}
 Components: main
 Architectures: ${PACKAGE_ARCH}
